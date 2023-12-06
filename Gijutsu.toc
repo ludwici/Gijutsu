@@ -1,0 +1,8 @@
+## Interface: 30300
+## Title: Gijutsu no Jutsu
+## Notes: Simple menu for displaying profession skills
+## Version: 1.0
+## Author: ludwici
+## SavedVariables: GijutsuDB
+
+Gijutsu.xml

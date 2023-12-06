@@ -1,0 +1,100 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
+
+    <Include file="Libs\libs.xml"/>
+    <Script file="core.lua"/>
+
+    <CheckButton name="GijutsuSpellButtonTemplate" movable="true" inherits="SecureActionButtonTemplate, ActionButtonTemplate" virtual="true">
+        <Scripts>
+            <OnLoad>
+                Gijutsu:LoadSpellButton(self);
+            </OnLoad>
+            <PostClick>
+                self:SetChecked(not self:GetChecked());
+            </PostClick>
+            <OnDragStart>
+                PickupSpell(self.spellName);
+            </OnDragStart>
+            <OnEnter>
+                GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+                GameTooltip:SetSpellByID(self.spellId);
+                GameTooltip:Show();
+            </OnEnter>
+            <OnLeave function="GameTooltip_Hide"/>
+        </Scripts>
+    </CheckButton>
+
+    <Frame name="GijutsuFrame" movable="true" clampedToScreen="true" parent="UIParent" hidden="true">
+        <Size x="310" y="75"/>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture>
+                    <Color r="0" g="0" b="0" a="0.3"/>
+                </Texture>
+            </Layer>
+            <Layer>
+                <FontString parentKey="Label" inherits="GameFontNormal" text="Gijutsu no Jutsu">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="5" y="-5"/>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Anchors>
+            <Anchor point="CENTER"/>
+        </Anchors>
+        <Frames>
+            <Button inherits="UIPanelCloseButton">
+                <Anchors>
+                    <Anchor point="TOPRIGHT"/>
+                </Anchors>
+            </Button>
+            <CheckButton name="$parentSpellButton1" inherits="GijutsuSpellButtonTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="5" y="-20"/>
+				</Anchors>
+			</CheckButton>
+            <CheckButton name="$parentSpellButton2" inherits="GijutsuSpellButtonTemplate" id="2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentSpellButton1" relativePoint="RIGHT" x="4"/>
+				</Anchors>
+			</CheckButton>
+            <CheckButton name="$parentSpellButton3" inherits="GijutsuSpellButtonTemplate" id="3">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentSpellButton2" relativePoint="RIGHT" x="4"/>
+				</Anchors>
+			</CheckButton>
+            <CheckButton name="$parentSpellButton4" inherits="GijutsuSpellButtonTemplate" id="4">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentSpellButton3" relativePoint="RIGHT" x="4"/>
+				</Anchors>
+			</CheckButton>
+            <CheckButton name="$parentSpellButton5" inherits="GijutsuSpellButtonTemplate" id="5">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentSpellButton4" relativePoint="RIGHT" x="4"/>
+				</Anchors>
+			</CheckButton>
+            <CheckButton name="$parentSpellButton6" inherits="GijutsuSpellButtonTemplate" id="6">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentSpellButton5" relativePoint="RIGHT" x="4"/>
+				</Anchors>
+			</CheckButton>
+            <CheckButton name="$parentSpellButton7" inherits="GijutsuSpellButtonTemplate" id="7">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentSpellButton6" relativePoint="RIGHT" x="4"/>
+				</Anchors>
+			</CheckButton>
+        </Frames>
+        <Scripts>
+            <OnLoad>
+                self:RegisterForDrag("LeftButton");
+            </OnLoad>
+            <OnDragStart>
+                self:StartMoving();
+            </OnDragStart>
+            <OnDragStop>
+                self:StopMovingOrSizing();
+            </OnDragStop>
+        </Scripts>
+    </Frame>
+
+</Ui>
